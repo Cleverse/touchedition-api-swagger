@@ -28,19 +28,19 @@
                         "type": "string"
                     },
                     {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit query length",
+                        "required": false,
+                        "type": "number",
+                        "default": 1
+                    },
+                    {
                         "name": "select",
                         "in": "query",
                         "description": "query only attributes",
                         "required": false,
                         "type": "string"
-                    },
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "description": "limit length",
-                        "required": false,
-                        "default": 3,
-                        "type": "number"
                     },
                     {
                         "name": "sortBy",
@@ -82,6 +82,7 @@
                         "in": "query",
                         "description": "Specific site id",
                         "required": false,
+                        "default": "55d465e5f48c35e6665c61cb",
                         "type": "string"
                     },
                     {
@@ -90,6 +91,14 @@
                         "description": "query only attributes",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit query length",
+                        "required": false,
+                        "type": "number",
+                        "default": 1
                     },
                     {
                         "name": "sortBy",
@@ -131,7 +140,8 @@
                         "in": "query",
                         "description": "Specific site id",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "default": "55d465e5f48c35e6665c61cb"
                     },
                     {
                         "name": "select",
@@ -139,6 +149,14 @@
                         "description": "query only attributes",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit query length",
+                        "required": false,
+                        "type": "number",
+                        "default": 1
                     },
                     {
                         "name": "sortBy",
@@ -170,7 +188,7 @@
                 }
             }
         },
-        "/sslides/one": {
+        "/api/ssslide/one": {
             "get": {
                 "summary": "Get One Sslide",
                 "description": "",
@@ -180,7 +198,8 @@
                         "in": "query",
                         "description": "Specific site id",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "default": "55d465e5f48c35e6665c61cb"
                     },
                     {
                         "name": "select",
@@ -209,17 +228,18 @@
                 }
             }
         },
-        "/api/sslides/seo": {
+        "/api/ssslide/{id}": {
             "get": {
-                "summary": "Get Sslide SEO",
+                "summary": "Get One Sslide",
                 "description": "",
                 "parameters": [
                     {
-                        "name": "site",
-                        "in": "query",
-                        "description": "Specific site id",
-                        "required": false,
-                        "type": "string"
+                        "name": "id",
+                        "in": "path",
+                        "description": "ssite id",
+                        "required": true,
+                        "type": "string",
+                        "default": "573ddad6fcd7a917000cf9e5"
                     },
                     {
                         "name": "select",
@@ -236,10 +256,79 @@
                     "200": {
                         "description": "An array of sslides",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/SEOHTML"
-                            }
+                            "$ref": "#/definitions/SSlide"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/ssslide/seo": {
+            "get": {
+                "summary": "Get Sslide SEO",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "site",
+                        "in": "query",
+                        "description": "Specific site id",
+                        "required": false,
+                        "type": "string",
+                        "default": "55d465e5f48c35e6665c61cb"
+                    },
+                    {
+                        "name": "select",
+                        "in": "query",
+                        "description": "query only attributes",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Sslides"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of sslides",
+                        "schema": {
+                            "$ref": "#/definitions/SEOHTML"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/{id}": {
+            "get": {
+                "summary": "get Category by id [Need Authorization]",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Specific category id",
+                        "required": true,
+                        "type": "string",
+                        "default": "55d465e5f48c35e6665c61cb"
+                    }
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of sslides",
+                        "schema": {
+                            "$ref": "#/definitions/Category"
                         }
                     },
                     "default": {
@@ -253,6 +342,26 @@
         }
     },
     "definitions": {
+        "Category": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific sslide."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Category Name"
+                },
+                "subscription": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    },
+                    "description": "Subscribtion List"
+                }
+            }
+        },
         "SEOHTML": {
             "type": "object",
             "properties": {

@@ -1,289 +1,197 @@
-{
-  "swagger": "2.0",
-  "info": {
-    "title": "Uber API",
-    "description": "Move your app forward with the Uber API",
-    "version": "1.0.0"
-  },
-  "host": "api2.touchedition.com",
-  "schemes": [
-    "https"
-  ],
-  "basePath": "/api",
-  "produces": [
-    "application/json"
-  ],
-  "paths": {
-    "/ssslides": {
-      "get": {
-        "summary": "Get Published Sslides",
-        "description": "",
-        "parameters": [
-          {
-            "name": "site",
-            "in": "query",
-            "description": "Specific site id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "select",
-            "in": "query",
-            "description": "query only attributes",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "Specify sort query [stats.day, stats.week, stats.month]",
-              "required": false,
-              "type": "string"
-            }
-          ],
-        "tags": [
-          "Sslides"
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of sslides",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SSlide"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/ssslides/all": {
-      "get": {
-        "summary": "Get All Sslides",
-        "description": "Require Authorizaztion",
-        "parameters": [
-          {
-            "name": "site",
-            "in": "query",
-            "description": "Specific site id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "select",
-            "in": "query",
-            "description": "query only attributes",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "Specify sort query [stats.day, stats.week, stats.month]",
-              "required": false,
-              "type": "string"
-            }
-          ],
-        "tags": [
-          "Sslides"
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of sslides",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SSlide"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/ssslides/template": {
-      "get": {
-        "summary": "Get All Template Sslides",
-        "description": "",
-        "parameters": [
-          {
-            "name": "site",
-            "in": "query",
-            "description": "Specific site id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "select",
-            "in": "query",
-            "description": "query only attributes",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "Specify sort query [stats.day, stats.week, stats.month]",
-              "required": false,
-              "type": "string"
-            }
-          ],
-        "tags": [
-          "Sslides"
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of sslides",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SSlide"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/sslides/one": {
-      "get": {
-        "summary": "Get One Sslide",
-        "description": "",
-        "parameters": [
-          {
-            "name": "site",
-            "in": "query",
-            "description": "Specific site id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "select",
-            "in": "query",
-            "description": "query only attributes",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Sslides"
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of sslides",
-            "schema": {
-              "$ref": "#/definitions/SSlide"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/sslides/seo": {
-      "get": {
-        "summary": "Get Sslide SEO",
-        "description": "",
-        "parameters": [
-          {
-            "name": "site",
-            "in": "query",
-            "description": "Specific site id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "select",
-            "in": "query",
-            "description": "query only attributes",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Sslides"
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of sslides",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SEOHTML"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "SEOHTML": {
-      "type": "object",
-      "properties": {
-        "html": {
-          "type": "string",
-          "description": "Unique identifier representing a specific sslide."
-        }
-      }
-    },
-    "SSlide": {
-      "type": "object",
-      "properties": {
-        "_id": {
-          "type": "string",
-          "description": "Unique identifier representing a specific sslide."
-        },
-        "title": {
-          "type": "string",
-          "description": "Display name of product."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of product."
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "fields": {
-          "type": "string"
-        }
-      }
-    }
-  }
-}
+swagger: '2.0'
+info:
+  title: Touchedition API
+  description: Move your app forward with the Touchedition API
+  version: 1.0.0
+host: api2.touchedition.com
+schemes:
+  - https
+basePath: /
+produces:
+  - application/json
+paths:
+  /api/ssslide:
+    get:
+      summary: Get Published Sslides
+      description: ''
+      parameters:
+        - name: site
+          in: query
+          description: Specific site id
+          required: false
+          type: string
+        - name: select
+          in: query
+          description: query only attributes
+          required: false
+          type: string
+        - name: sortBy
+          in: query
+          description: 'Specify sort query [stats.day, stats.week, stats.month]'
+          required: false
+          type: string
+      tags:
+        - Sslides
+      responses:
+        '200':
+          description: An array of sslides
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SSlide'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /api/ssslide/all:
+    get:
+      summary: Get All Sslides
+      description: Require Authorizaztion
+      parameters:
+        - name: site
+          in: query
+          description: Specific site id
+          required: false
+          type: string
+        - name: select
+          in: query
+          description: query only attributes
+          required: false
+          type: string
+        - name: sortBy
+          in: query
+          description: 'Specify sort query [stats.day, stats.week, stats.month]'
+          required: false
+          type: string
+      tags:
+        - Sslides
+      responses:
+        '200':
+          description: An array of sslides
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SSlide'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /api/ssslide/template:
+    get:
+      summary: Get All Template Sslides
+      description: ''
+      parameters:
+        - name: site
+          in: query
+          description: Specific site id
+          required: false
+          type: string
+        - name: select
+          in: query
+          description: query only attributes
+          required: false
+          type: string
+        - name: sortBy
+          in: query
+          description: 'Specify sort query [stats.day, stats.week, stats.month]'
+          required: false
+          type: string
+      tags:
+        - Sslides
+      responses:
+        '200':
+          description: An array of sslides
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SSlide'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /sslides/one:
+    get:
+      summary: Get One Sslide
+      description: ''
+      parameters:
+        - name: site
+          in: query
+          description: Specific site id
+          required: false
+          type: string
+        - name: select
+          in: query
+          description: query only attributes
+          required: false
+          type: string
+      tags:
+        - Sslides
+      responses:
+        '200':
+          description: An array of sslides
+          schema:
+            $ref: '#/definitions/SSlide'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /api/sslides/seo:
+    get:
+      summary: Get Sslide SEO
+      description: ''
+      parameters:
+        - name: site
+          in: query
+          description: Specific site id
+          required: false
+          type: string
+        - name: select
+          in: query
+          description: query only attributes
+          required: false
+          type: string
+      tags:
+        - Sslides
+      responses:
+        '200':
+          description: An array of sslides
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SEOHTML'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  # /api/category:
+  #   get /:id:
+  #     summary
+definitions:
+  SEOHTML:
+    type: object
+    properties:
+      html:
+        type: string
+        description: Unique identifier representing a specific sslide.
+  SSlide:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: Unique identifier representing a specific sslide.
+      title:
+        type: string
+        description: Display name of product.
+      description:
+        type: string
+        description: Description of product.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string

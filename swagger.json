@@ -309,8 +309,41 @@
             }
         },
         "/api/category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Specific category id",
+                    "required": true,
+                    "type": "string",
+                    "default": "55d465e5f48c35e6665c61cb"
+                }
+            ],
             "get": {
                 "summary": "get Category by id [Need Authorization]",
+                "tags": [
+                    "Category"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "a Category",
+                        "schema": {
+                            "$ref": "#/definitions/Category"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "update Category by id [Need Authorization]",
+                "tags": [
+                    "Category"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -319,14 +352,147 @@
                         "required": true,
                         "type": "string",
                         "default": "55d465e5f48c35e6665c61cb"
+                    },
+                    {
+                        "name": "category",
+                        "in": "body",
+                        "description": "Specific category id",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Category"
+                        }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "a Category",
+                        "schema": {
+                            "$ref": "#/definitions/Category"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "get Category by id [Need Authorization]",
                 "tags": [
                     "Category"
                 ],
                 "responses": {
                     "200": {
-                        "description": "An array of sslides",
+                        "description": "a Category",
+                        "schema": {
+                            "$ref": "#/definitions/Category"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/{id}/subscribe": {
+            "post": {
+                "summary": "Add Subscribtion",
+                "tags": [
+                    "Category",
+                    "Subsribtion"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Specific category id",
+                        "required": true,
+                        "type": "string",
+                        "default": "55d465e5f48c35e6665c61cb"
+                    },
+                    {
+                        "name": "subscribtions",
+                        "in": "body",
+                        "description": "Specific category id",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Subscription"
+                                    },
+                                    "description": "Subscribtion List"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "a Category",
+                        "schema": {
+                            "$ref": "#/definitions/Category"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/{id}/subscribe/{sid}": {
+            "delete": {
+                "summary": "Remove Subscribtion",
+                "tags": [
+                    "Category",
+                    "Subsribtion"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Specific category id",
+                        "required": true,
+                        "type": "string",
+                        "default": "55d465e5f48c35e6665c61cb"
+                    },
+                    {
+                        "name": "sid",
+                        "in": "path",
+                        "description": "Specific subscribtion id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subscribtions",
+                        "in": "body",
+                        "description": "Specific category id",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Subscribtion ID List"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "a Category",
                         "schema": {
                             "$ref": "#/definitions/Category"
                         }
@@ -342,6 +508,23 @@
         }
     },
     "definitions": {
+        "Subscription": {
+            "type": "object",
+            "properties": {
+                "site": {
+                    "type": "string",
+                    "description": "Site identifier"
+                },
+                "category": {
+                    "type": "string",
+                    "description": "Category Name"
+                },
+                "approve": {
+                    "type": "string",
+                    "description": "aprrove status"
+                }
+            }
+        },
         "Category": {
             "type": "object",
             "properties": {
@@ -356,7 +539,7 @@
                 "subscription": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Error"
+                        "$ref": "#/definitions/Subscription"
                     },
                     "description": "Subscribtion List"
                 }
